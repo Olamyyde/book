@@ -1,14 +1,18 @@
 package com.example.book.model;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "COURSES")
+@Table(name = "secdb")
 public class Course {
 
     @Id
@@ -27,4 +31,6 @@ public class Course {
 
     @Column(name = "DESCRIPTION")
     private String description;
+
+
 }
