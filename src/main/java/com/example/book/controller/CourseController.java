@@ -52,6 +52,7 @@ public class CourseController {
 
     @PutMapping("{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    @Operation(summary = "Updates the course details in the Course Tracker application for the supplied course id")
     public void updateCourse(@PathVariable("id") long courseId, @RequestBody Course course) {
         courseService.updateCourse(courseId, course);
     }
