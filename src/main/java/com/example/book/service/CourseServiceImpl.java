@@ -1,5 +1,6 @@
 package com.example.book.service;
 
+import com.example.book.exception.CourseNotFoundException;
 import com.example.book.model.Course;
 import com.example.book.repository.CourseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,7 @@ public class CourseServiceImpl implements CourseService {
 
             courseRepository.save(dbCourse);
         });
+        throw new CourseNotFoundException(String.format("No course with id %s is available", courseId));
     }
 
     @Override
@@ -56,6 +58,8 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void deleteCourseById(long courseId) {
-        courseRepository.deleteById(courseId);
+        Course course = courseRepository.findById(courseId)
+                .orElseThrow(() -> new CourseNotFoundException(String.format("No course with id %s is available", courseId)));
+        courseRepository.delete(course);
     }
 }
